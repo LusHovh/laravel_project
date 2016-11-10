@@ -19,7 +19,7 @@ class PostService
 
 	public function getMyPosts() 
 	{
-    	return $posts = $this->post->where("user_id", Auth::user()->id)->get();
+    		return $posts = $this->post->where("user_id", Auth::user()->id)->get();
 	}
 
 	public function getPostById($id) 
