@@ -56,7 +56,7 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        dd('show', $id);
+       
         return view('user.profile', ['user' => User::findOrFail($id)]);
     }
 
