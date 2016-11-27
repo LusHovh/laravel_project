@@ -8,6 +8,8 @@ use App\Services\PostService;
 use File;
 use Auth;
 use Validator;
+use App\Http\Requests\StoreBlogPostRequest;
+
 class PostsController extends Controller
 {
     /**
@@ -87,21 +89,11 @@ class PostsController extends Controller
         return redirect()->back()->withWarning('Something went wrong. Please try later');
     }
 
-     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request, PostService $postService)
+    public function store(StoreBlogPostRequest $request, PostService $postService)
     {
-        $this->validate($request, [
-            'title' => 'required|unique:posts|max:255',
-            'body' => 'required',
-            'image'=> 'mimes:jpeg,bmp,gif,png',
-        ]);
-        return redirect('posts')->withSuccess('Post has been successfully created');
-       
+        $postService->createPost($request->all());
+        
+        return redirect('posts');
     }
 
     /**

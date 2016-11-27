@@ -5,7 +5,7 @@ use App\Models\Post;
 use Auth;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
-class PostService 
+class PostService
 {
 	public function __construct(Post $post)
 	{
@@ -19,7 +19,7 @@ class PostService
 
 	public function getMyPosts() 
 	{
-    		return $posts = $this->post->where("user_id", Auth::user()->id)->get();
+        return $posts = $this->post->where("user_id", Auth::user()->id)->get();
 	}
 
 	public function getPostById($id) 
@@ -46,16 +46,6 @@ class PostService
 		$file_name = str_random(32).'.'.$file->getClientOriginalExtension();
 		return $file_name;
 	}
-
-	public function getUpdateParams($params, $file_name) 
-	{
-		$inputs = [];
-		$inputs['title'] = $params['title'];
-		$inputs['content'] = $params['content'];
-		$inputs['image'] = $file_name;
-		$inputs['user_id']  = Auth::user()->id;
-		return $inputs;
-	}
 	
     public function createPost($params) 
     {		
@@ -67,5 +57,15 @@ class PostService
 		$inputs = $this->getUpdateParams($params, $file_name);           
         
 		return $this->post->create($inputs);
+	}
+
+	private function getUpdateParams($params, $file_name) 
+	{
+		$inputs = [];
+		$inputs['title'] = $params['title'];
+		$inputs['content'] = $params['content'];
+		$inputs['image'] = $file_name;
+		$inputs['user_id']  = Auth::user()->id;
+		return $inputs;
 	}
 }

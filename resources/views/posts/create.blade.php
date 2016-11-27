@@ -17,7 +17,7 @@
         @if(isset($post))
             {{ Form::model($post, ['url' => '/posts/'.$post->id, 'method' => 'PUT', 'files' => true]) }}
         @else 
-            {!! Form::open(['url' => '/posts', 'method' => 'POST', 'files' => true]) !!}
+            {!! Form::open(['url' => 'posts', 'method' => 'POST', 'files' => true]) !!}
         @endif
             <div class=" form-group">
 
