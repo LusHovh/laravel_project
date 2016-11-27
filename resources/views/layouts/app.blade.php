@@ -6,11 +6,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">        
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{ config('app.name', 'Laravel') }}</title>    
-        <link href="/css/app.css" rel="stylesheet">       
+        <link href="/css/app.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
         <script>
             window.Laravel = <?php echo json_encode([
                 'csrfToken' => csrf_token(),]); ?>
         </script>
+        @yield('style')
     </head>
     <body>
         <div class='container' id="app">

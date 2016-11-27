@@ -12,11 +12,6 @@ use App\Http\Requests\StoreBlogPostRequest;
 
 class PostsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -40,47 +35,23 @@ class PostsController extends Controller
        return view('posts.showMyPost',['posts' => $posts]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         return view('posts.create');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
        
         return view('user.profile', ['user' => User::findOrFail($id)]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id, PostService $postService)
     {
         $post = $postService->getPostById($id);
         return view('posts.create', ['post' => $post]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id, PostService $postService)
     {
         if(null != $postService->updatePost($request->all(), $id)) {
@@ -96,18 +67,13 @@ class PostsController extends Controller
         return redirect('posts');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id, PostService $postService)
     {
         $post = $postService->getPostById($id);
         $post->delete();
         $file=$post->image;
         File::delete('images/'.$file);
-        return redirect('/posts');
+
+        return redirect('posts');
     }
 }

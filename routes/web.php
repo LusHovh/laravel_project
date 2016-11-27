@@ -9,10 +9,10 @@ Route::get('posts/{id}/showPost', 'PostsController@showPost');
 
 Route::post('add', 'PostController@uploadFiles');
 Route::post('posts', 'PostsController@store');
+Route::post('posts/{id}/delete', 'PostsController@destroy');
 
 Route::put('posts/{id}', 'PostsController@update');
 
-Route::delete('posts/{id}', 'PostsController@destroy');
 
 Auth::routes();
 
